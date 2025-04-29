@@ -2,7 +2,7 @@
 
 ## A Comprehensive Solution for Identifying and Managing Duplicate Photos in Immich
 
-![image](https://github.com/vale46n1/immich_duplicate_finder/assets/36825789/933b168d-b7ff-4cd0-8117-92852b6dc1cc)
+![image](https://github.com/CodiAsFox/immich_duplicate_finder/assets/36825789/933b168d-b7ff-4cd0-8117-92852b6dc1cc)
 
 The "Immich Duplicate Finder" is an tool designed to seamlessly be integrated with the Immich API, targeting the efficient detection and management of duplicate images through hashing detection (and future incorporation of machine learning technologies). This project aims to enhance storage optimization and organization within the Immich ecosystem.
 
@@ -35,7 +35,7 @@ The "Immich Duplicate Finder" is an tool designed to seamlessly be integrated wi
 Begin by cloning this repository to your local machine. You can do this by running the following command in your terminal or command prompt:
 
 ```bash
-git clone https://github.com/vale46n1/immich_duplicate_finder.git
+git clone https://github.com/CodiAsFox/immich_duplicate_finder.git
 ```
 
 ### Install Dependencies
