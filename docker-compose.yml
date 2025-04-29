@@ -2,9 +2,14 @@ name: immich-duplicate-finder
 services:
   immich-duplicate-finder:
     container_name: immich-duplicate-finder
-    hostname: immich-duplicate-finder
+    image: docker pull ghcr.io/codiasfox/immich_duplicate_finder:latest
     restart: unless-stopped
     ports:
       - 8501:8501
-    build:
-      dockerfile: './Dockerfile'
+    volumes:
+      - ./immich-duplicates/data:/immich_duplicate_finder/data
+        - ./immich-duplicates/cache:/root/.cache/torch/
+    environment:
+      - IMMICH_API_KEY=
+      - IMMICH_URL=
+      - IMMICH_API_TIMEOUT=2000
