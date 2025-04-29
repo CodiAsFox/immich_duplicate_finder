@@ -1,12 +1,20 @@
-FROM python:3.12
+FROM python:3.9-slim
 
-RUN git clone https://github.com/CodiAsFox/immich_duplicate_finder.git /immich_duplicate_finder && \
-  cd /immich_duplicate_finder && \
-  pip install -r requirements.txt && \
-  pip cache purge
+WORKDIR /app
 
-WORKDIR /immich_duplicate_finder
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    curl \
+    software-properties-common \
+    git \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY . .
+
+RUN pip3 install -r requirements.txt
+
 EXPOSE 8501
-HEALTHCHECK CMD curl -fsS http://127.0.0.1:8501 | grep -c 'title>Immich Duplicate Finder</title' || exit 1
 
-CMD streamlit run app.py
+HEALTHCHECK CMD curl --fail http://localhost:8501/_stcore/health
+
+ENTRYPOINT ["streamlit", "run", "app.py", "--server.port=8501", "--server.address=0.0.0.0"]
