@@ -42,3 +42,21 @@ jobs:
           tags: |
             ghcr.io/${{ steps.repo.outputs.name }}:latest
             ghcr.io/${{ steps.repo.outputs.name }}:${{ steps.get_version.outputs.version }}
+
+      - name: Notify Discord on success
+        if: success()
+        run: |
+          curl -X POST -H "Content-Type: application/json" \
+          -d '{
+            "content": "**✅ Docker image build succeeded!**\nRepository: `${{ github.repository }}`\nVersion: `${{ steps.get_version.outputs.version }}`"
+          }' \
+          ${{ secrets.DISCORD_WEBHOOK }}
+
+      - name: Notify Discord on failure
+        if: failure()
+        run: |
+          curl -X POST -H "Content-Type: application/json" \
+          -d '{
+            "content": "**❌ Docker image build failed!**\nRepository: `${{ github.repository }}`"
+          }' \
+          ${{ secrets.DISCORD_WEBHOOK }}
